@@ -1,0 +1,588 @@
+/* ==========================================================================
+   bitqik Blockchain Box UI — Orange Primary Theme
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Lao:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap');
+
+:root {
+  /* Predominant Bitqik Orange Palette */
+  --bq-orange: #F26522;
+  --bq-orange-bright: #FF6600;
+  --bq-orange-neon: #FF7700;
+  --bq-orange-deep: #D44200;
+  --bq-orange-dark: #9E2B00;
+  --bq-orange-bg: #E85000;
+  
+  --bq-dark-block: rgba(22, 10, 4, 0.78);
+  --bq-dark-block-hover: rgba(35, 14, 4, 0.88);
+  --bq-dark-solid: #120602;
+
+  /* Blockchain Glass Block Styling */
+  --block-bg: rgba(28, 12, 4, 0.65);
+  --block-bg-hover: rgba(45, 18, 5, 0.85);
+  --block-border: rgba(255, 255, 255, 0.22);
+  --block-border-glow: #FF7700;
+  
+  --block-shadow: 0 16px 40px rgba(120, 30, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+  --block-shadow-hover: 0 20px 50px rgba(255, 85, 0, 0.6), inset 0 2px 4px rgba(255, 255, 255, 0.6);
+
+  --blur-amount: blur(28px) saturate(220%);
+  --radius-box: 16px;
+  --radius-sm: 10px;
+
+  /* Text Colors */
+  --text-white: #FFFFFF;
+  --text-orange-light: #FFD4BC;
+  --text-muted: rgba(255, 255, 255, 0.65);
+  
+  /* Fonts */
+  --font-main: 'Noto Sans Lao', 'Outfit', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-smooth: 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Reset & Global */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: var(--font-main);
+  background-color: #C83C00;
+  color: var(--text-white);
+  overflow-x: hidden;
+}
+
+body {
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-bottom: 4rem;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bq-orange-dark);
+}
+::-webkit-scrollbar-thumb {
+  background: #FF9944;
+  border-radius: 99px;
+}
+
+/* Predominant Orange Ambient Mesh Background */
+.ambient-background {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background: radial-gradient(circle at 50% 10%, #FF6600 0%, #E04B00 40%, #8A2200 90%);
+  overflow: hidden;
+}
+
+.ambient-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.65;
+  animation: liquidFloat 16s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+.blob-1 {
+  width: 650px;
+  height: 650px;
+  background: radial-gradient(circle, #FF8800 0%, rgba(255, 136, 0, 0) 70%);
+  top: -150px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.blob-2 {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, #FF3300 0%, rgba(255, 51, 0, 0) 70%);
+  bottom: 0%;
+  right: -100px;
+  animation-delay: -5s;
+}
+
+.blob-3 {
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, #FFBB00 0%, rgba(255, 187, 0, 0) 70%);
+  top: 40%;
+  left: -100px;
+  animation-delay: -10s;
+}
+
+@keyframes liquidFloat {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(30px, 50px) scale(1.15); }
+  100% { transform: translate(-30px, -30px) scale(0.9); }
+}
+
+/* Blockchain Grid Pattern Overlay */
+.blockchain-grid-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  opacity: 0.45;
+}
+
+/* Page Wrapper */
+.page-wrapper {
+  width: 100%;
+  max-width: 680px;
+  padding: 1.5rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  z-index: 1;
+}
+
+/* Top Utility Bar (Blockchain Node Header) */
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0.65rem 1.2rem;
+  background: var(--block-bg);
+  backdrop-filter: var(--blur-amount);
+  -webkit-backdrop-filter: var(--blur-amount);
+  border: 1.5px solid var(--block-border);
+  border-radius: var(--radius-box);
+  box-shadow: var(--block-shadow);
+}
+
+.node-status {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-orange-light);
+  letter-spacing: 0.05em;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #00FF66;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #00FF66;
+  animation: pulseGreen 1.8s infinite;
+}
+
+@keyframes pulseGreen {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.top-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.lang-btn {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: var(--text-white);
+  padding: 0.35rem 0.85rem;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.lang-btn:hover {
+  background: var(--bq-orange-bright);
+  border-color: #FFFFFF;
+}
+
+/* ==========================================================================
+   BLOCKCHAIN HERO BOX & OFFICIAL LOGO
+   ========================================================================== */
+.blockchain-hero-box {
+  position: relative;
+  background: var(--bq-dark-block);
+  backdrop-filter: var(--blur-amount);
+  -webkit-backdrop-filter: var(--blur-amount);
+  border: 2px solid rgba(255, 255, 255, 0.28);
+  border-radius: var(--radius-box);
+  padding: 2.2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-shadow: var(--block-shadow), 0 0 35px rgba(242, 101, 34, 0.4);
+  transition: var(--transition-smooth);
+}
+
+.blockchain-hero-box:hover {
+  border-color: var(--bq-orange-neon);
+  box-shadow: var(--block-shadow-hover);
+}
+
+/* Block Corner Nodes decoration */
+.block-corner-tl, .block-corner-tr, .block-corner-bl, .block-corner-br {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-color: #FF8800;
+  border-style: solid;
+  pointer-events: none;
+}
+.block-corner-tl { top: 6px; left: 6px; border-width: 2px 0 0 2px; }
+.block-corner-tr { top: 6px; right: 6px; border-width: 2px 2px 0 0; }
+.block-corner-bl { bottom: 6px; left: 6px; border-width: 0 0 2px 2px; }
+.block-corner-br { bottom: 6px; right: 6px; border-width: 0 2px 2px 0; }
+
+.official-logo-container {
+  width: 100%;
+  max-width: 290px;
+  margin-bottom: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8rem 1.2rem;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.8);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  transition: var(--transition-smooth);
+}
+
+.official-logo-container:hover {
+  transform: scale(1.03);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 30px var(--bq-orange-neon);
+}
+
+.official-logo-img {
+  width: 100%;
+  height: auto;
+  max-height: 75px;
+  object-fit: contain;
+}
+
+.hero-subtitle {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-orange-light);
+  margin-bottom: 0.8rem;
+  line-height: 1.5;
+}
+
+.hero-license-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 1.1rem;
+  background: rgba(255, 102, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 99px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+/* ==========================================================================
+   DOWNLOAD APP FEATURED BLOCK (NO QR CODE)
+   ========================================================================== */
+.app-download-box {
+  position: relative;
+  background: var(--bq-dark-block);
+  backdrop-filter: var(--blur-amount);
+  -webkit-backdrop-filter: var(--blur-amount);
+  border: 2px solid rgba(255, 255, 255, 0.28);
+  border-radius: var(--radius-box);
+  padding: 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr 150px;
+  gap: 1.2rem;
+  align-items: center;
+  box-shadow: var(--block-shadow);
+  overflow: hidden;
+  transition: var(--transition-smooth);
+}
+
+.app-download-box:hover {
+  border-color: var(--bq-orange-neon);
+  box-shadow: var(--block-shadow-hover);
+}
+
+.app-title-tag {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #FF8800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.3rem;
+}
+
+.app-download-box h3 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin-bottom: 0.4rem;
+}
+
+.app-download-box p {
+  font-size: 0.85rem;
+  color: var(--text-orange-light);
+  margin-bottom: 1.1rem;
+  line-height: 1.5;
+}
+
+.btn-download-now {
+  background: linear-gradient(135deg, #FF6600 0%, #FF3300 100%);
+  color: #FFFFFF;
+  padding: 0.7rem 1.4rem;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  font-weight: 800;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  box-shadow: 0 6px 20px rgba(255, 85, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  transition: var(--transition-fast);
+}
+
+.btn-download-now:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 8px 30px rgba(255, 102, 0, 0.8);
+  background: linear-gradient(135deg, #FF8800 0%, #FF5500 100%);
+}
+
+.app-art-container {
+  width: 150px;
+  height: 130px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+}
+
+.app-art-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.app-download-box:hover .app-art-container img {
+  transform: scale(1.08);
+}
+
+/* ==========================================================================
+   BLOCKCHAIN LINK CARDS (ONLY WEBSITE, FACEBOOK, TIKTOK, YOUTUBE)
+   ========================================================================== */
+.links-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.section-title-block {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-orange-light);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0 0.4rem;
+}
+
+.link-blocks-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Individual Blockchain Glass Block Card */
+.blockchain-link-card {
+  position: relative;
+  background: var(--bq-dark-block);
+  backdrop-filter: var(--blur-amount);
+  -webkit-backdrop-filter: var(--blur-amount);
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  border-radius: var(--radius-box);
+  padding: 1.1rem 1.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-decoration: none;
+  color: #FFFFFF;
+  box-shadow: var(--block-shadow);
+  overflow: hidden;
+  transition: var(--transition-smooth);
+}
+
+.blockchain-link-card:hover {
+  background: var(--bq-dark-block-hover);
+  border-color: var(--bq-orange-neon);
+  transform: translateY(-3px) scale(1.01);
+  box-shadow: var(--block-shadow-hover);
+}
+
+.card-left {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+}
+
+/* Blockchain Node Icon Box */
+.node-icon-box {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.05) 100%);
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  transition: var(--transition-fast);
+}
+
+.blockchain-link-card:hover .node-icon-box {
+  transform: scale(1.1) rotate(3deg);
+  background: linear-gradient(135deg, #FF6600 0%, #FF3300 100%);
+  border-color: #FFFFFF;
+  box-shadow: 0 0 20px rgba(255, 102, 0, 0.8);
+}
+
+.card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.block-tag-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.block-hash {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #FF9944;
+  letter-spacing: 0.05em;
+}
+
+.card-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  line-height: 1.3;
+}
+
+.card-desc {
+  font-size: 0.84rem;
+  color: var(--text-orange-light);
+}
+
+.card-right {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.arrow-box {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  transition: var(--transition-fast);
+}
+
+.blockchain-link-card:hover .arrow-box {
+  background: #FF6600;
+  border-color: #FFFFFF;
+  transform: translateX(4px);
+}
+
+/* Footer */
+.footer-block {
+  margin-top: 1.5rem;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-orange-light);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Toast */
+.toast-notification {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: linear-gradient(135deg, #FF6600 0%, #FF3300 100%);
+  color: #FFFFFF;
+  padding: 0.75rem 1.5rem;
+  border-radius: 99px;
+  font-size: 0.88rem;
+  font-weight: 800;
+  box-shadow: 0 10px 30px rgba(255, 102, 0, 0.6);
+  z-index: 1100;
+  transition: var(--transition-fast);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.toast-notification.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+/* Responsive Rules */
+@media (max-width: 600px) {
+  .page-wrapper {
+    padding: 1rem 0.85rem;
+  }
+  .app-download-box {
+    grid-template-columns: 1fr;
+  }
+  .app-art-container {
+    display: none;
+  }
+  .official-logo-container {
+    max-width: 240px;
+  }
+}
