@@ -98,15 +98,17 @@
         <!-- Populated by js/app.js -->
       </ul>
 
-      <!-- Interactive 3D Phone Mockup Stage -->
+      <!-- Interactive 3D Phone Mockup Stage (No Shadow, Download Icon) -->
       <div class="phone-3d-stage" id="phoneStage">
         <a href="https://bitqik.com/download" target="_blank" rel="noopener noreferrer" class="phone-3d-wrapper" id="phoneWrapper" title="Download bitqik Mobile App">
           <div class="phone-3d-device" id="phoneDevice">
             <div class="phone-screen-sheen" id="phoneSheen"></div>
             <img src="assets/app_mockup_3d.png" alt="bitqik Mobile App 3D Mockup" class="phone-mockup-img" />
-            <div class="phone-float-tag">
-              <span class="phone-pulse-dot"></span>
-              <span data-i18n="appPreviewLabel">bitqik Mobile App</span>
+            <!-- Download Icon Button -->
+            <div class="phone-download-badge" aria-label="Download App" title="Download App">
+              <svg class="download-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 3v12m0 0l-4.5-4.5M12 15l4.5-4.5M4 19h16"/>
+              </svg>
             </div>
           </div>
         </a>
