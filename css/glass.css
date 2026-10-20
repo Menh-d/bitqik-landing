@@ -1,588 +1,673 @@
 /* ==========================================================================
-   bitqik Blockchain Box UI — Orange Primary Theme
+   bitqik — Swiss Minimalist Architectural Grid UI (Asklepios Style)
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Lao:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Lao:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
 :root {
-  /* Predominant Bitqik Orange Palette */
-  --bq-orange: #F26522;
-  --bq-orange-bright: #FF6600;
-  --bq-orange-neon: #FF7700;
-  --bq-orange-deep: #D44200;
-  --bq-orange-dark: #9E2B00;
-  --bq-orange-bg: #E85000;
+  /* Outer Frame & Canvas Colors */
+  --outer-bg: #C5CED6;
+  --canvas-bg: #F26522;
+  --canvas-bg-gradient: linear-gradient(135deg, #FF621A 0%, #F26522 55%, #E04E0B 100%);
   
-  --bq-dark-block: rgba(22, 10, 4, 0.78);
-  --bq-dark-block-hover: rgba(35, 14, 4, 0.88);
-  --bq-dark-solid: #120602;
+  /* Hairline Architectural Grid */
+  --grid-line-color: rgba(255, 255, 255, 0.38);
+  --grid-line-width: 1.5px;
+  --grid-curve-radius: 32px;
 
-  /* Blockchain Glass Block Styling */
-  --block-bg: rgba(28, 12, 4, 0.65);
-  --block-bg-hover: rgba(45, 18, 5, 0.85);
-  --block-border: rgba(255, 255, 255, 0.22);
-  --block-border-glow: #FF7700;
-  
-  --block-shadow: 0 16px 40px rgba(120, 30, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.4);
-  --block-shadow-hover: 0 20px 50px rgba(255, 85, 0, 0.6), inset 0 2px 4px rgba(255, 255, 255, 0.6);
-
-  --blur-amount: blur(28px) saturate(220%);
-  --radius-box: 16px;
-  --radius-sm: 10px;
-
-  /* Text Colors */
+  /* Typography Colors */
   --text-white: #FFFFFF;
-  --text-orange-light: #FFD4BC;
-  --text-muted: rgba(255, 255, 255, 0.65);
-  
+  --text-muted: rgba(255, 255, 255, 0.72);
+  --text-dim: rgba(255, 255, 255, 0.5);
+
   /* Fonts */
-  --font-main: 'Noto Sans Lao', 'Outfit', sans-serif;
+  --font-sans: 'Plus Jakarta Sans', 'Noto Sans Lao', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 
-  --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  --transition-smooth: 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  /* Transitions */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Reset & Global */
+/* Optional Blue Theme Variant (like the reference image) */
+body[data-theme="blue"] {
+  --canvas-bg: #0D5BFF;
+  --canvas-bg-gradient: linear-gradient(135deg, #1463FF 0%, #0A52EB 60%, #0043D1 100%);
+}
+
+/* Optional Dark Navy Theme Variant (bitqik secondary brand color) */
+body[data-theme="navy"] {
+  --canvas-bg: #002B49;
+  --canvas-bg-gradient: linear-gradient(135deg, #06385E 0%, #002B49 60%, #001B30 100%);
+}
+
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-html {
-  scroll-behavior: smooth;
-  font-family: var(--font-main);
-  background-color: #C83C00;
+html, body {
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--outer-bg);
+  font-family: var(--font-sans);
   color: var(--text-white);
   overflow-x: hidden;
 }
 
 body {
-  min-height: 100vh;
-  position: relative;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  padding-bottom: 4rem;
+  justify-content: center;
+  padding: clamp(14px, 3.2vw, 44px);
 }
 
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-::-webkit-scrollbar-track {
-  background: var(--bq-orange-dark);
-}
-::-webkit-scrollbar-thumb {
-  background: #FF9944;
-  border-radius: 99px;
-}
-
-/* Predominant Orange Ambient Mesh Background */
-.ambient-background {
-  position: fixed;
-  inset: 0;
-  z-index: -2;
-  background: radial-gradient(circle at 50% 10%, #FF6600 0%, #E04B00 40%, #8A2200 90%);
-  overflow: hidden;
-}
-
-.ambient-blob {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(100px);
-  opacity: 0.65;
-  animation: liquidFloat 16s ease-in-out infinite alternate;
-  pointer-events: none;
-}
-
-.blob-1 {
-  width: 650px;
-  height: 650px;
-  background: radial-gradient(circle, #FF8800 0%, rgba(255, 136, 0, 0) 70%);
-  top: -150px;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.blob-2 {
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, #FF3300 0%, rgba(255, 51, 0, 0) 70%);
-  bottom: 0%;
-  right: -100px;
-  animation-delay: -5s;
-}
-
-.blob-3 {
-  width: 450px;
-  height: 450px;
-  background: radial-gradient(circle, #FFBB00 0%, rgba(255, 187, 0, 0) 70%);
-  top: 40%;
-  left: -100px;
-  animation-delay: -10s;
-}
-
-@keyframes liquidFloat {
-  0% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(30px, 50px) scale(1.15); }
-  100% { transform: translate(-30px, -30px) scale(0.9); }
-}
-
-/* Blockchain Grid Pattern Overlay */
-.blockchain-grid-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  background-image: 
-    linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
-  background-size: 40px 40px;
-  pointer-events: none;
-  opacity: 0.45;
-}
-
-/* Page Wrapper */
-.page-wrapper {
+/* ==========================================================================
+   MAIN ROUNDED ARCHITECTURAL CANVAS CARD
+   ========================================================================== */
+.canvas-card {
+  position: relative;
   width: 100%;
-  max-width: 680px;
-  padding: 1.5rem 1.2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+  max-width: 1360px;
+  min-height: calc(100vh - clamp(28px, 6.4vw, 88px));
+  background: var(--canvas-bg-gradient);
+  border-radius: 26px;
+  box-shadow: 
+    0 30px 70px rgba(15, 23, 42, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 24% 16% 1fr;
+  grid-template-rows: auto 1fr auto;
+  transition: background 0.5s var(--ease-out-expo);
+}
+
+/* ==========================================================================
+   ARCHITECTURAL INTERSECTING ROUNDED HAIRLINE GRID
+   ========================================================================== */
+/* Upper-Left Curved Line: Top edge down to 54%, then curves left */
+.arch-line-upper {
+  position: absolute;
+  top: 0;
+  left: 9.5%;
+  width: 14.5%; /* reaches x = 24% */
+  height: 54%;
+  border-right: var(--grid-line-width) solid var(--grid-line-color);
+  border-bottom: var(--grid-line-width) solid var(--grid-line-color);
+  border-bottom-right-radius: var(--grid-curve-radius);
+  pointer-events: none;
   z-index: 1;
 }
 
-/* Top Utility Bar (Blockchain Node Header) */
-.top-bar {
+/* Lower-Left Curved Line: From 54% horizontal going left, curves down to bottom edge at x = 24% */
+.arch-line-lower {
+  position: absolute;
+  top: calc(54% - var(--grid-line-width));
+  left: calc(24% - var(--grid-line-width));
+  width: 14.5%; /* extends right to 38.5% */
+  height: calc(46% + var(--grid-line-width));
+  border-top: var(--grid-line-width) solid var(--grid-line-color);
+  border-left: var(--grid-line-width) solid var(--grid-line-color);
+  border-top-left-radius: var(--grid-curve-radius);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ==========================================================================
+   TOP BAR: LOGO (LEFT) & MAIN MENU + CONTROLS (RIGHT)
+   ========================================================================== */
+.top-left-brand {
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+  padding: 36px 24px 20px 42px;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+}
+
+.brand-logo-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-white);
+  transition: transform 0.3s var(--ease-out-expo);
+}
+
+.brand-logo-link:hover {
+  transform: translateY(-1px);
+}
+
+/* Official Logo Pill + Crisp Emblem */
+.logo-mark-wrap {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.logo-official-badge {
+  height: 40px;
+  padding: 5px 12px;
+  background: #FFFFFF;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.14);
+}
+
+.logo-official-badge img {
+  height: 26px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.top-right-menu {
+  grid-column: 2 / 4;
+  grid-row: 1 / 2;
+  padding: 36px 46px 20px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 22px;
+  z-index: 5;
+}
+
+/* Theme Color Dots (Orange / Blue / Navy) */
+.theme-switcher {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.14);
+  padding: 4px 8px;
+  border-radius: 99px;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+}
+
+.theme-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.theme-dot:hover {
+  transform: scale(1.2);
+}
+
+.theme-dot.orange { background: #F26522; }
+.theme-dot.blue { background: #0D5BFF; }
+.theme-dot.navy { background: #002B49; }
+
+/* Language Switch Button */
+.lang-toggle-btn {
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  color: var(--text-white);
+  padding: 5px 12px;
+  border-radius: 99px;
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.lang-toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.26);
+  transform: translateY(-1px);
+}
+
+/* Asklepios "Main Menu ╰──────" Indicator */
+.menu-header-indicator {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-white);
+  letter-spacing: 0.01em;
+}
+
+.menu-l-line {
+  display: inline-block;
+  width: 54px;
+  height: 11px;
+  border-left: 1.5px solid var(--text-white);
+  border-bottom: 1.5px solid var(--text-white);
+  border-bottom-left-radius: 5px;
+  transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   LEFT COLUMN: SECONDARY INFO (ABOVE LINE) & SOCIAL ICONS (BELOW LINE)
+   ========================================================================== */
+.left-quadrant-info {
+  position: absolute;
+  left: 9.5%;
+  bottom: calc(46% + 26px);
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-right: 16px;
+}
+
+.secondary-info-link {
+  color: var(--text-white);
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-weight: 500;
+  line-height: 1.45;
+  opacity: 0.9;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.secondary-info-link:hover {
+  opacity: 1;
+  transform: translateX(3px);
+}
+
+/* Social Media Vertical Stack inside Lower-Left Quadrant */
+.social-vertical-stack {
+  position: absolute;
+  left: calc(24% + 34px);
+  top: calc(54% + 34px);
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.social-icon-link {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-white);
+  text-decoration: none;
+  opacity: 0.92;
+  transition: transform 0.25s var(--ease-out-expo), opacity 0.25s ease;
+}
+
+.social-icon-link:hover {
+  opacity: 1;
+  transform: scale(1.18) translateX(2px);
+}
+
+.social-icon-link svg {
+  width: 21px;
+  height: 21px;
+  fill: currentColor;
+}
+
+/* ==========================================================================
+   CENTER-RIGHT: MASSIVE EDITORIAL NAVIGATION LIST
+   ========================================================================== */
+.main-editorial-stage {
+  grid-column: 3 / 4;
+  grid-row: 2 / 3;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
-  padding: 0.65rem 1.2rem;
-  background: var(--block-bg);
-  backdrop-filter: var(--blur-amount);
-  -webkit-backdrop-filter: var(--blur-amount);
-  border: 1.5px solid var(--block-border);
-  border-radius: var(--radius-box);
-  box-shadow: var(--block-shadow);
+  padding: 20px 60px 40px 6%;
+  z-index: 5;
+  gap: 40px;
 }
 
-.node-status {
+.editorial-nav-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(6px, 1.2vh, 14px);
+}
+
+.editorial-nav-item {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 0.6rem;
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  font-weight: 700;
-  color: var(--text-orange-light);
-  letter-spacing: 0.05em;
 }
 
-.status-dot {
+.editorial-nav-link {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--text-white);
+  font-size: clamp(2.35rem, 4.8vw, 4.35rem);
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  transition: transform 0.35s var(--ease-out-expo), opacity 0.25s ease;
+  position: relative;
+}
+
+/* Dim non-hovered items slightly when hovering the list */
+.editorial-nav-list:hover .editorial-nav-link {
+  opacity: 0.68;
+}
+
+.editorial-nav-list .editorial-nav-link:hover,
+.editorial-nav-list .editorial-nav-link.is-active {
+  opacity: 1;
+}
+
+/* The Iconic Asklepios Curved L-Prefix "╰─" */
+.nav-l-prefix {
+  display: inline-block;
+  width: 0;
+  height: 26px;
+  border-left: 3px solid var(--text-white);
+  border-bottom: 3px solid var(--text-white);
+  border-bottom-left-radius: 10px;
+  margin-right: 0;
+  opacity: 0;
+  transform: translateY(-6px) translateX(-10px);
+  transition: 
+    width 0.35s var(--ease-out-expo),
+    margin-right 0.35s var(--ease-out-expo),
+    opacity 0.25s ease,
+    transform 0.35s var(--ease-out-expo);
+  flex-shrink: 0;
+}
+
+.editorial-nav-link:hover .nav-l-prefix,
+.editorial-nav-link.is-active .nav-l-prefix {
+  width: 26px;
+  margin-right: 18px;
+  opacity: 1;
+  transform: translateY(-6px) translateX(0);
+}
+
+.nav-item-sub {
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.75);
+  margin-left: 16px;
+  padding: 4px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 99px;
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: opacity 0.3s ease, transform 0.3s var(--ease-out-expo);
+  white-space: nowrap;
+}
+
+.editorial-nav-link:hover .nav-item-sub {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ==========================================================================
+   INTERACTIVE 3D PHONE MOCKUP STAGE
+   ========================================================================== */
+.phone-3d-stage {
+  perspective: 1400px;
+  perspective-origin: 50% 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  padding: 10px;
+}
+
+.phone-3d-wrapper {
+  position: relative;
+  display: block;
+  text-decoration: none;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  animation: floatPhone3D 6s ease-in-out infinite alternate;
+  transition: transform 0.25s var(--ease-out-expo);
+}
+
+/* Natural 3D Resting Angle */
+.phone-3d-device {
+  position: relative;
+  width: clamp(210px, 18vw, 260px);
+  aspect-ratio: 505 / 1024;
+  transform-style: preserve-3d;
+  transform: rotateY(-18deg) rotateX(10deg) rotateZ(3deg);
+  transition: transform 0.3s var(--ease-out-expo), filter 0.3s ease;
+  filter: 
+    drop-shadow(-28px 38px 45px rgba(0, 0, 0, 0.42))
+    drop-shadow(-6px 12px 18px rgba(0, 0, 0, 0.28));
+}
+
+.phone-3d-wrapper:hover .phone-3d-device {
+  transform: rotateY(-8deg) rotateX(4deg) rotateZ(1deg) scale(1.05) translateZ(25px);
+  filter: 
+    drop-shadow(-34px 48px 55px rgba(0, 0, 0, 0.52))
+    drop-shadow(-8px 16px 24px rgba(0, 0, 0, 0.35));
+}
+
+/* Phone PNG Image */
+.phone-mockup-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Photorealistic Glass Specular Sheen across screen */
+.phone-screen-sheen {
+  position: absolute;
+  inset: 1.5% 3.5%;
+  border-radius: 46px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.35) 0%,
+    rgba(255, 255, 255, 0.12) 28%,
+    rgba(255, 255, 255, 0) 55%
+  );
+  pointer-events: none;
+  z-index: 2;
+  mix-blend-mode: screen;
+  opacity: 0.85;
+  transition: opacity 0.3s ease;
+}
+
+.phone-3d-wrapper:hover .phone-screen-sheen {
+  opacity: 1;
+}
+
+/* Floating Glass Pill Badge */
+.phone-float-tag {
+  position: absolute;
+  bottom: -18px;
+  left: 50%;
+  transform: translateX(-50%) translateZ(40px);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  color: #101828;
+  padding: 7px 16px;
+  border-radius: 99px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.22);
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: transform 0.3s var(--ease-out-expo), background 0.3s ease;
+  z-index: 3;
+}
+
+.phone-pulse-dot {
   width: 8px;
   height: 8px;
-  background-color: #00FF66;
   border-radius: 50%;
-  box-shadow: 0 0 10px #00FF66;
+  background: #10B981;
+  box-shadow: 0 0 10px #10B981;
   animation: pulseGreen 1.8s infinite;
 }
 
 @keyframes pulseGreen {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.4; }
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
 }
 
-.top-actions {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
+.phone-3d-wrapper:hover .phone-float-tag {
+  transform: translateX(-50%) translateZ(60px) scale(1.08);
+  background: #FFFFFF;
 }
 
-.lang-btn {
-  background: rgba(255, 255, 255, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  color: var(--text-white);
-  padding: 0.35rem 0.85rem;
-  border-radius: 8px;
-  font-size: 0.82rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: var(--transition-fast);
-}
-
-.lang-btn:hover {
-  background: var(--bq-orange-bright);
-  border-color: #FFFFFF;
+/* Gentle 3D Bobbing Float Animation */
+@keyframes floatPhone3D {
+  0% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(-14px);
+  }
 }
 
 /* ==========================================================================
-   BLOCKCHAIN HERO BOX & OFFICIAL LOGO
+   BOTTOM RIGHT COPYRIGHT
    ========================================================================== */
-.blockchain-hero-box {
-  position: relative;
-  background: var(--bq-dark-block);
-  backdrop-filter: var(--blur-amount);
-  -webkit-backdrop-filter: var(--blur-amount);
-  border: 2px solid rgba(255, 255, 255, 0.28);
-  border-radius: var(--radius-box);
-  padding: 2.2rem 1.5rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  box-shadow: var(--block-shadow), 0 0 35px rgba(242, 101, 34, 0.4);
-  transition: var(--transition-smooth);
-}
-
-.blockchain-hero-box:hover {
-  border-color: var(--bq-orange-neon);
-  box-shadow: var(--block-shadow-hover);
-}
-
-/* Block Corner Nodes decoration */
-.block-corner-tl, .block-corner-tr, .block-corner-bl, .block-corner-br {
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  border-color: #FF8800;
-  border-style: solid;
-  pointer-events: none;
-}
-.block-corner-tl { top: 6px; left: 6px; border-width: 2px 0 0 2px; }
-.block-corner-tr { top: 6px; right: 6px; border-width: 2px 2px 0 0; }
-.block-corner-bl { bottom: 6px; left: 6px; border-width: 0 0 2px 2px; }
-.block-corner-br { bottom: 6px; right: 6px; border-width: 0 2px 2px 0; }
-
-.official-logo-container {
-  width: 100%;
-  max-width: 290px;
-  margin-bottom: 1.2rem;
+.bottom-right-copyright {
+  grid-column: 2 / 4;
+  grid-row: 3 / 4;
+  padding: 20px 46px 32px 24px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding: 0.8rem 1.2rem;
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 14px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.8);
-  border: 2px solid rgba(255, 255, 255, 0.5);
-  transition: var(--transition-smooth);
+  justify-content: flex-end;
+  z-index: 5;
 }
 
-.official-logo-container:hover {
-  transform: scale(1.03);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 30px var(--bq-orange-neon);
-}
-
-.official-logo-img {
-  width: 100%;
-  height: auto;
-  max-height: 75px;
-  object-fit: contain;
-}
-
-.hero-subtitle {
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: var(--text-orange-light);
-  margin-bottom: 0.8rem;
-  line-height: 1.5;
-}
-
-.hero-license-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.4rem 1.1rem;
-  background: rgba(255, 102, 0, 0.25);
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  border-radius: 99px;
-  font-size: 0.8rem;
-  font-weight: 700;
-  color: #FFFFFF;
-}
-
-/* ==========================================================================
-   DOWNLOAD APP FEATURED BLOCK (NO QR CODE)
-   ========================================================================== */
-.app-download-box {
-  position: relative;
-  background: var(--bq-dark-block);
-  backdrop-filter: var(--blur-amount);
-  -webkit-backdrop-filter: var(--blur-amount);
-  border: 2px solid rgba(255, 255, 255, 0.28);
-  border-radius: var(--radius-box);
-  padding: 1.5rem;
-  display: grid;
-  grid-template-columns: 1fr 150px;
-  gap: 1.2rem;
-  align-items: center;
-  box-shadow: var(--block-shadow);
-  overflow: hidden;
-  transition: var(--transition-smooth);
-}
-
-.app-download-box:hover {
-  border-color: var(--bq-orange-neon);
-  box-shadow: var(--block-shadow-hover);
-}
-
-.app-title-tag {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  font-weight: 700;
-  color: #FF8800;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin-bottom: 0.3rem;
-}
-
-.app-download-box h3 {
-  font-size: 1.25rem;
-  font-weight: 800;
-  color: #FFFFFF;
-  margin-bottom: 0.4rem;
-}
-
-.app-download-box p {
-  font-size: 0.85rem;
-  color: var(--text-orange-light);
-  margin-bottom: 1.1rem;
-  line-height: 1.5;
-}
-
-.btn-download-now {
-  background: linear-gradient(135deg, #FF6600 0%, #FF3300 100%);
-  color: #FFFFFF;
-  padding: 0.7rem 1.4rem;
-  border-radius: 12px;
-  font-size: 0.9rem;
-  font-weight: 800;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  box-shadow: 0 6px 20px rgba(255, 85, 0, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  transition: var(--transition-fast);
-}
-
-.btn-download-now:hover {
-  transform: translateY(-2px) scale(1.03);
-  box-shadow: 0 8px 30px rgba(255, 102, 0, 0.8);
-  background: linear-gradient(135deg, #FF8800 0%, #FF5500 100%);
-}
-
-.app-art-container {
-  width: 150px;
-  height: 130px;
-  border-radius: 12px;
-  overflow: hidden;
-  border: 1.5px solid rgba(255, 255, 255, 0.25);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
-}
-
-.app-art-container img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.5s ease;
-}
-
-.app-download-box:hover .app-art-container img {
-  transform: scale(1.08);
-}
-
-/* ==========================================================================
-   BLOCKCHAIN LINK CARDS (ONLY WEBSITE, FACEBOOK, TIKTOK, YOUTUBE)
-   ========================================================================== */
-.links-section {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.section-title-block {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-family: var(--font-mono);
-  font-size: 0.82rem;
-  font-weight: 700;
-  color: var(--text-orange-light);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  padding: 0 0.4rem;
-}
-
-.link-blocks-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-/* Individual Blockchain Glass Block Card */
-.blockchain-link-card {
-  position: relative;
-  background: var(--bq-dark-block);
-  backdrop-filter: var(--blur-amount);
-  -webkit-backdrop-filter: var(--blur-amount);
-  border: 2px solid rgba(255, 255, 255, 0.25);
-  border-radius: var(--radius-box);
-  padding: 1.1rem 1.3rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  text-decoration: none;
-  color: #FFFFFF;
-  box-shadow: var(--block-shadow);
-  overflow: hidden;
-  transition: var(--transition-smooth);
-}
-
-.blockchain-link-card:hover {
-  background: var(--bq-dark-block-hover);
-  border-color: var(--bq-orange-neon);
-  transform: translateY(-3px) scale(1.01);
-  box-shadow: var(--block-shadow-hover);
-}
-
-.card-left {
-  display: flex;
-  align-items: center;
-  gap: 1.1rem;
-}
-
-/* Blockchain Node Icon Box */
-.node-icon-box {
-  width: 52px;
-  height: 52px;
-  border-radius: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.05) 100%);
-  border: 1.5px solid rgba(255, 255, 255, 0.35);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-  font-size: 1.5rem;
-  flex-shrink: 0;
-  transition: var(--transition-fast);
-}
-
-.blockchain-link-card:hover .node-icon-box {
-  transform: scale(1.1) rotate(3deg);
-  background: linear-gradient(135deg, #FF6600 0%, #FF3300 100%);
-  border-color: #FFFFFF;
-  box-shadow: 0 0 20px rgba(255, 102, 0, 0.8);
-}
-
-.card-info {
-  display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
-}
-
-.block-tag-row {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.block-hash {
-  font-family: var(--font-mono);
+.copyright-text {
   font-size: 0.68rem;
-  font-weight: 700;
-  color: #FF9944;
-  letter-spacing: 0.05em;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.85);
 }
 
-.card-title {
-  font-size: 1.05rem;
-  font-weight: 800;
-  color: #FFFFFF;
-  line-height: 1.3;
-}
-
-.card-desc {
-  font-size: 0.84rem;
-  color: var(--text-orange-light);
-}
-
-.card-right {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-}
-
-.arrow-box {
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #FFFFFF;
-  transition: var(--transition-fast);
-}
-
-.blockchain-link-card:hover .arrow-box {
-  background: #FF6600;
-  border-color: #FFFFFF;
-  transform: translateX(4px);
-}
-
-/* Footer */
-.footer-block {
-  margin-top: 1.5rem;
-  text-align: center;
-  font-size: 0.8rem;
-  color: var(--text-orange-light);
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-/* Toast */
-.toast-notification {
-  position: fixed;
-  bottom: 2rem;
-  left: 50%;
-  transform: translateX(-50%) translateY(100px);
-  background: linear-gradient(135deg, #FF6600 0%, #FF3300 100%);
-  color: #FFFFFF;
-  padding: 0.75rem 1.5rem;
-  border-radius: 99px;
-  font-size: 0.88rem;
-  font-weight: 800;
-  box-shadow: 0 10px 30px rgba(255, 102, 0, 0.6);
-  z-index: 1100;
-  transition: var(--transition-fast);
-  opacity: 0;
-  pointer-events: none;
-}
-
-.toast-notification.show {
-  transform: translateX(-50%) translateY(0);
-  opacity: 1;
-}
-
-/* Responsive Rules */
-@media (max-width: 600px) {
-  .page-wrapper {
-    padding: 1rem 0.85rem;
+/* ==========================================================================
+   RESPONSIVE DESIGN (TABLET & MOBILE)
+   ========================================================================== */
+@media (max-width: 1120px) {
+  .main-editorial-stage {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 20px 36px 30px 4%;
+    gap: 30px;
   }
-  .app-download-box {
+
+  .phone-3d-stage {
+    align-self: center;
+  }
+
+  .phone-3d-device {
+    width: 200px;
+    transform: rotateY(-12deg) rotateX(8deg);
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    padding: 10px;
+  }
+
+  .canvas-card {
     grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto auto;
+    min-height: calc(100vh - 20px);
+    border-radius: 22px;
   }
-  .app-art-container {
+
+  /* Adjust architectural lines cleanly for mobile viewport */
+  .arch-line-upper {
+    left: 6%;
+    width: 18%;
+    height: 20%;
+  }
+
+  .arch-line-lower {
+    top: calc(20% - var(--grid-line-width));
+    left: calc(24% - var(--grid-line-width));
+    width: 24%;
+    height: 80%;
+  }
+
+  .top-left-brand {
+    grid-column: 1 / -1;
+    grid-row: 1 / 2;
+    padding: 24px 20px 10px 24px;
+    justify-content: space-between;
+  }
+
+  .top-right-menu {
+    grid-column: 1 / -1;
+    grid-row: 1 / 2;
+    padding: 24px 24px 10px 0;
+    pointer-events: none;
+  }
+
+  .top-right-menu > * {
+    pointer-events: auto;
+  }
+
+  .menu-header-indicator {
     display: none;
   }
-  .official-logo-container {
-    max-width: 240px;
+
+  .main-editorial-stage {
+    grid-column: 1 / -1;
+    grid-row: 2 / 3;
+    padding: 30px 24px 24px 26%;
+    gap: 32px;
+  }
+
+  .phone-3d-stage {
+    align-self: center;
+    margin-top: 10px;
+  }
+
+  .phone-3d-device {
+    width: 180px;
+    transform: rotateY(-8deg) rotateX(6deg);
+  }
+
+  .editorial-nav-link {
+    font-size: clamp(1.85rem, 7.5vw, 2.6rem);
+  }
+
+  .nav-item-sub {
+    display: none;
+  }
+
+  .left-quadrant-info {
+    position: relative;
+    left: auto;
+    bottom: auto;
+    grid-column: 1 / -1;
+    grid-row: 3 / 4;
+    padding: 0 24px 16px 26%;
+  }
+
+  .social-vertical-stack {
+    position: absolute;
+    left: 8%;
+    top: 26%;
+  }
+
+  .bottom-right-copyright {
+    grid-column: 1 / -1;
+    grid-row: 4 / 5;
+    padding: 16px 24px 24px 26%;
+    justify-content: flex-start;
   }
 }

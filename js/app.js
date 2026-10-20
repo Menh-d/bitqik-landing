@@ -1,129 +1,183 @@
 /* ==========================================================================
-   bitqik Link Hub — Blockchain Box UI Logic & Official Links
+   bitqik — Swiss Minimalist Architectural Grid UI Logic (Asklepios Style)
    ========================================================================== */
 
-// 1. Data Store: ONLY 4 Official Channels (Website, Facebook, TikTok, YouTube)
-const bitqikLinks = [
+const bitqikNavItems = [
   {
     id: "website",
-    hash: "#BLOCK-WEB01",
-    icon: "🌐",
-    title: { lao: "ເວັບໄຊທ໌ທາງການ (Official Website)", en: "Official Website" },
-    desc: { lao: "ສູນຊື້-ຂາຍ ສິນຊັບດິຈິທັອນອັນດັບ 1 ໃນລາວ — bitqik.com", en: "Laos #1 Digital Asset Exchange Platform — bitqik.com" },
+    title: { en: "Website", lao: "ເວັບໄຊທ໌ທາງການ" },
+    sub: { en: "bitqik.com", lao: "bitqik.com" },
     url: "https://bitqik.com",
-    tag: "MAIN NET"
+    defaultActive: true
+  },
+  {
+    id: "download",
+    title: { en: "Download App", lao: "ດາວໂຫລດແອັບ" },
+    sub: { en: "iOS & Android", lao: "iOS & Android" },
+    url: "https://bitqik.com/download",
+    defaultActive: false
   },
   {
     id: "facebook",
-    hash: "#BLOCK-FB02",
-    icon: "🔵",
-    title: { lao: "Facebook Page ທາງການ", en: "Official Facebook Page" },
-    desc: { lao: "ຕິດຕາມຂ່າວສານ, ກິດຈະກໍາ ແລະ ໂປຣໂມຊັນຫຼ້າສຸດ", en: "Follow official news, events & latest campaigns" },
+    title: { en: "Facebook", lao: "Facebook Page" },
+    sub: { en: "@bitqik", lao: "ຂ່າວສານ & ກິດຈະກໍາ" },
     url: "https://www.facebook.com/bitqik",
-    tag: "SOCIAL"
+    defaultActive: false
   },
   {
     id: "tiktok",
-    hash: "#BLOCK-TK03",
-    icon: "🎵",
-    title: { lao: "TikTok @bitqikofficial", en: "Official TikTok Channel" },
-    desc: { lao: "ວິດີໂອສັ້ນ ເທັກນິກການເທຣດ ແລະ ຄວາມຮູ້ crypto ເຂົ້າໃຈງ່າຍ", en: "Short entertaining & educational crypto videos" },
+    title: { en: "TikTok", lao: "TikTok Official" },
+    sub: { en: "@bitqikofficial", lao: "ວິດີໂອສັ້ນ Crypto" },
     url: "https://www.tiktok.com/@bitqikofficial",
-    tag: "VIRAL"
+    defaultActive: false
   },
   {
     id: "youtube",
-    hash: "#BLOCK-YT04",
-    icon: "▶️",
-    title: { lao: "YouTube Official Channel", en: "Official YouTube Channel" },
-    desc: { lao: "ຄລິບສອນການໃຊ້ງານແອັບ ແລະ ວິເຄາະຕະຫຼາດຢ່າງລະອຽດ", en: "Full video tutorials & market breakdown" },
+    title: { en: "YouTube", lao: "YouTube Channel" },
+    sub: { en: "@bitqikofficial", lao: "ສອນເທຣດ & ວິເຄາະ" },
     url: "https://www.youtube.com/@bitqikofficial",
-    tag: "MEDIA"
+    defaultActive: false
   }
 ];
 
-// 2. UI Translation Dictionary
 const i18n = {
-  lao: {
-    statusText: "BLOCKCHAIN NODE: ACTIVE",
-    heroDesc: "ແພລດຟອມຊື້-ຂາຍ ສິນຊັບດິຈິທັອນ ທີ່ໄດ້ຮັບໃບອະນຸຍາດຢ່າງເປັນທາງການ ໃນສາທາລະນະລັດ ປະຊາທິປະໄຕ ປະຊາຊົນລາວ",
-    licenseTag: "🛡️ Licensed & Regulated by Bank of Lao PDR",
-    appTag: "MOBILE APPLICATION",
-    appTitle: "ດາວໂຫລດແອັບ bitqik ເທຣດໄດ້ທຸກທີ່!",
-    appDesc: "ປະສົບການເທຣດ crypto ທີ່ງ່າຍດາຍ, ປອດໄພ ພ້ອມລະບົບຝາກ-ຖອນ ເງິນກີບອັດໂນມັດ 24 ຊົ່ວໂມງ",
-    appBtn: "📲 ດາວໂຫລດແອັບມືຖື",
-    sectionTitle: "ລິ້ງທາງການຂອງ bitqik (OFFICIAL CHANNELS)",
-    toastCopied: "ຄັດລອກລິ້ງສຳເລັດແລ້ວ!",
-    rights: "© 2026 bitqik Sole Co., Ltd. All rights reserved."
-  },
   en: {
-    statusText: "BLOCKCHAIN NODE: ACTIVE",
-    heroDesc: "Official Licensed & Regulated Digital Asset Exchange Platform in Lao PDR",
-    licenseTag: "🛡️ Licensed & Regulated by Bank of Lao PDR",
-    appTag: "MOBILE APPLICATION",
-    appTitle: "Download bitqik App — Trade Anywhere!",
-    appDesc: "Seamless crypto trading experience with instant 24/7 LAK fiat deposits & withdrawals.",
-    appBtn: "📲 Download Mobile App",
-    sectionTitle: "Official bitqik Channels & Links",
-    toastCopied: "Link copied to clipboard!",
-    rights: "© 2026 bitqik Sole Co., Ltd. All rights reserved."
+    menuHeader: "Main Menu",
+    infoLicense: "Licensed by BOL",
+    infoSupport: "Support Center",
+    infoPrivacy: "Privacy Policy",
+    infoTerms: "Terms of Use",
+    appPreviewLabel: "bitqik Mobile App",
+    appPreviewTag: "GET APP",
+    copyright: "COPYRIGHT 2026 © BITQIK SOLE CO., LTD. ALL RIGHTS RESERVED."
+  },
+  lao: {
+    menuHeader: "ເມນູຫຼັກ",
+    infoLicense: "ໃບອະນຸຍາດ ທຫລ (BOL)",
+    infoSupport: "ສູນຊ່ວຍເຫຼືອ 24/7",
+    infoPrivacy: "ນະໂຍບາຍຄວາມເປັນສ່ວນຕົວ",
+    infoTerms: "ເງື່ອນໄຂການໃຊ້ບໍລິການ",
+    appPreviewLabel: "ດາວໂຫລດແອັບ bitqik",
+    appPreviewTag: "ດາວໂຫລດ",
+    copyright: "COPYRIGHT 2026 © BITQIK SOLE CO., LTD. ສະຫງວນລິຂະສິດທັງໝົດ."
   }
 };
 
-let currentLang = "lao";
+let currentLang = "en";
 
-// Render Links
-function renderLinks() {
-  const container = document.getElementById("link-grid");
-  if (!container) return;
+function renderEditorialNav() {
+  const listEl = document.getElementById("editorial-nav-list");
+  if (!listEl) return;
 
-  container.innerHTML = bitqikLinks.map(item => {
-    const title = item.title[currentLang];
-    const desc = item.desc[currentLang];
+  listEl.innerHTML = bitqikNavItems
+    .map((item) => {
+      const label = item.title[currentLang];
+      const sub = item.sub[currentLang];
+      const activeClass = item.defaultActive ? "is-active" : "";
 
-    return `
-      <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="blockchain-link-card">
-        <div class="card-left">
-          <div class="node-icon-box">${item.icon}</div>
-          <div class="card-info">
-            <div class="block-tag-row">
-              <span class="block-hash">${item.hash}</span>
-            </div>
-            <span class="card-title">${title}</span>
-            <span class="card-desc">${desc}</span>
-          </div>
-        </div>
-        <div class="card-right">
-          <div class="arrow-box">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="9 18 15 12 9 6"></polyline>
-            </svg>
-          </div>
-        </div>
-      </a>
-    `;
-  }).join('');
+      return `
+        <li class="editorial-nav-item">
+          <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="editorial-nav-link ${activeClass}" data-id="${item.id}">
+            <span class="nav-l-prefix" aria-hidden="true"></span>
+            <span class="nav-item-title">${label}</span>
+            <span class="nav-item-sub">${sub}</span>
+          </a>
+        </li>
+      `;
+    })
+    .join("");
+
+  // Interactive hover behavior: move `is-active` L-prefix smoothly to hovered item
+  const links = listEl.querySelectorAll(".editorial-nav-link");
+  links.forEach((link) => {
+    link.addEventListener("mouseenter", () => {
+      links.forEach((l) => l.classList.remove("is-active"));
+      link.classList.add("is-active");
+    });
+  });
+
+  listEl.addEventListener("mouseleave", () => {
+    links.forEach((l) => l.classList.remove("is-active"));
+    const defaultLink = listEl.querySelector('[data-id="website"]');
+    if (defaultLink) defaultLink.classList.add("is-active");
+  });
 }
 
-// Update UI Language
 function setLanguage(lang) {
   currentLang = lang;
-  document.getElementById("lang-btn-text").innerText = lang === "lao" ? "🇱🇦 ລາວ" : "🇬🇧 English";
-  
-  document.querySelectorAll("[data-i18n]").forEach(el => {
+  const langBtn = document.getElementById("lang-btn-text");
+  if (langBtn) {
+    langBtn.textContent = lang === "en" ? "🇱🇦 ລາວ" : "🇬🇧 EN";
+  }
+
+  document.querySelectorAll("[data-i18n]").forEach((el) => {
     const key = el.getAttribute("data-i18n");
     if (i18n[lang] && i18n[lang][key]) {
-      el.innerText = i18n[lang][key];
+      el.textContent = i18n[lang][key];
     }
   });
 
-  renderLinks();
+  renderEditorialNav();
+}
+
+function setTheme(themeName) {
+  if (themeName === "orange") {
+    document.body.removeAttribute("data-theme");
+  } else {
+    document.body.setAttribute("data-theme", themeName);
+  }
+}
+
+// Interactive 3D Phone Parallax Effect on Mouse Move
+function initPhone3DParallax() {
+  const stage = document.getElementById("phoneStage");
+  const device = document.getElementById("phoneDevice");
+  const sheen = document.getElementById("phoneSheen");
+  if (!stage || !device) return;
+
+  window.addEventListener("mousemove", (e) => {
+    if (window.innerWidth < 1024) return;
+
+    const rect = stage.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+
+    const deltaX = (e.clientX - centerX) / (window.innerWidth / 2);
+    const deltaY = (e.clientY - centerY) / (window.innerHeight / 2);
+
+    const rotateY = -18 + deltaX * 14;
+    const rotateX = 10 - deltaY * 12;
+    const rotateZ = 3 + deltaX * 3;
+
+    device.style.transform = `rotateY(${rotateY.toFixed(2)}deg) rotateX(${rotateX.toFixed(2)}deg) rotateZ(${rotateZ.toFixed(2)}deg)`;
+
+    if (sheen) {
+      const sheenOpacity = Math.max(0.4, Math.min(1, 0.85 - deltaX * 0.3 + deltaY * 0.2));
+      sheen.style.opacity = sheenOpacity;
+    }
+  });
+
+  stage.addEventListener("mouseleave", () => {
+    device.style.transform = `rotateY(-18deg) rotateX(10deg) rotateZ(3deg)`;
+    if (sheen) sheen.style.opacity = 0.85;
+  });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  renderLinks();
+  renderEditorialNav();
+  initPhone3DParallax();
 
-  document.getElementById("lang-btn").addEventListener("click", () => {
-    setLanguage(currentLang === "lao" ? "en" : "lao");
+  const langBtn = document.getElementById("lang-btn");
+  if (langBtn) {
+    langBtn.addEventListener("click", () => {
+      setLanguage(currentLang === "en" ? "lao" : "en");
+    });
+  }
+
+  document.querySelectorAll(".theme-dot").forEach((dot) => {
+    dot.addEventListener("click", () => {
+      const theme = dot.getAttribute("data-theme-choice");
+      setTheme(theme);
+    });
   });
 });
