@@ -1,5 +1,6 @@
 /* ==========================================================================
    bitqik — Swiss Minimalist Architectural Grid UI Logic (Asklepios Style)
+   Theme: Deep Bitqik Navy Blue
    ========================================================================== */
 
 const bitqikNavItems = [
@@ -120,14 +121,6 @@ function setLanguage(lang) {
   renderEditorialNav();
 }
 
-function setTheme(themeName) {
-  if (themeName === "orange") {
-    document.body.removeAttribute("data-theme");
-  } else {
-    document.body.setAttribute("data-theme", themeName);
-  }
-}
-
 // Interactive 3D Phone Parallax Effect on Mouse Move
 function initPhone3DParallax() {
   const stage = document.getElementById("phoneStage");
@@ -173,11 +166,4 @@ document.addEventListener("DOMContentLoaded", () => {
       setLanguage(currentLang === "en" ? "lao" : "en");
     });
   }
-
-  document.querySelectorAll(".theme-dot").forEach((dot) => {
-    dot.addEventListener("click", () => {
-      const theme = dot.getAttribute("data-theme-choice");
-      setTheme(theme);
-    });
-  });
 });

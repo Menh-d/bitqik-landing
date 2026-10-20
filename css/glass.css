@@ -1,17 +1,18 @@
 /* ==========================================================================
    bitqik — Swiss Minimalist Architectural Grid UI (Asklepios Style)
+   Theme: Deep Bitqik Navy Blue
    ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Lao:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
 :root {
-  /* Outer Frame & Canvas Colors */
-  --outer-bg: #C5CED6;
-  --canvas-bg: #F26522;
-  --canvas-bg-gradient: linear-gradient(135deg, #FF621A 0%, #F26522 55%, #E04E0B 100%);
+  /* Outer Frame & Canvas Colors (Deep Bitqik Navy Blue as Default) */
+  --outer-bg: #B8C5CE;
+  --canvas-bg: #002B49;
+  --canvas-bg-gradient: linear-gradient(135deg, #083E66 0%, #002B49 55%, #001A2E 100%);
   
   /* Hairline Architectural Grid */
-  --grid-line-color: rgba(255, 255, 255, 0.38);
+  --grid-line-color: rgba(255, 255, 255, 0.35);
   --grid-line-width: 1.5px;
   --grid-curve-radius: 32px;
 
@@ -26,18 +27,6 @@
 
   /* Transitions */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* Optional Blue Theme Variant (like the reference image) */
-body[data-theme="blue"] {
-  --canvas-bg: #0D5BFF;
-  --canvas-bg-gradient: linear-gradient(135deg, #1463FF 0%, #0A52EB 60%, #0043D1 100%);
-}
-
-/* Optional Dark Navy Theme Variant (bitqik secondary brand color) */
-body[data-theme="navy"] {
-  --canvas-bg: #002B49;
-  --canvas-bg-gradient: linear-gradient(135deg, #06385E 0%, #002B49 60%, #001B30 100%);
 }
 
 *, *::before, *::after {
@@ -75,13 +64,12 @@ body {
   background: var(--canvas-bg-gradient);
   border-radius: 26px;
   box-shadow: 
-    0 30px 70px rgba(15, 23, 42, 0.18),
+    0 30px 70px rgba(0, 15, 30, 0.28),
     inset 0 1px 0 rgba(255, 255, 255, 0.25);
   overflow: hidden;
   display: grid;
   grid-template-columns: 24% 16% 1fr;
   grid-template-rows: auto 1fr auto;
-  transition: background 0.5s var(--ease-out-expo);
 }
 
 /* ==========================================================================
@@ -155,7 +143,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.14);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
 }
 
 .logo-official-badge img {
@@ -176,40 +164,12 @@ body {
   z-index: 5;
 }
 
-/* Theme Color Dots (Orange / Blue / Navy) */
-.theme-switcher {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  background: rgba(255, 255, 255, 0.14);
-  padding: 4px 8px;
-  border-radius: 99px;
-  border: 1px solid rgba(255, 255, 255, 0.24);
-}
-
-.theme-dot {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  border: 1.5px solid rgba(255, 255, 255, 0.8);
-  cursor: pointer;
-  transition: transform 0.2s ease;
-}
-
-.theme-dot:hover {
-  transform: scale(1.2);
-}
-
-.theme-dot.orange { background: #F26522; }
-.theme-dot.blue { background: #0D5BFF; }
-.theme-dot.navy { background: #002B49; }
-
 /* Language Switch Button */
 .lang-toggle-btn {
   background: rgba(255, 255, 255, 0.14);
   border: 1px solid rgba(255, 255, 255, 0.28);
   color: var(--text-white);
-  padding: 5px 12px;
+  padding: 6px 14px;
   border-radius: 99px;
   font-family: var(--font-sans);
   font-size: 0.78rem;
@@ -437,15 +397,15 @@ body {
   transform: rotateY(-18deg) rotateX(10deg) rotateZ(3deg);
   transition: transform 0.3s var(--ease-out-expo), filter 0.3s ease;
   filter: 
-    drop-shadow(-28px 38px 45px rgba(0, 0, 0, 0.42))
-    drop-shadow(-6px 12px 18px rgba(0, 0, 0, 0.28));
+    drop-shadow(-28px 38px 45px rgba(0, 0, 0, 0.5))
+    drop-shadow(-6px 12px 18px rgba(0, 0, 0, 0.35));
 }
 
 .phone-3d-wrapper:hover .phone-3d-device {
   transform: rotateY(-8deg) rotateX(4deg) rotateZ(1deg) scale(1.05) translateZ(25px);
   filter: 
-    drop-shadow(-34px 48px 55px rgba(0, 0, 0, 0.52))
-    drop-shadow(-8px 16px 24px rgba(0, 0, 0, 0.35));
+    drop-shadow(-34px 48px 55px rgba(0, 0, 0, 0.6))
+    drop-shadow(-8px 16px 24px rgba(0, 0, 0, 0.45));
 }
 
 /* Phone PNG Image */
@@ -489,13 +449,13 @@ body {
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  color: #101828;
+  color: #002B49;
   padding: 7px 16px;
   border-radius: 99px;
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.02em;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.22);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.28);
   white-space: nowrap;
   display: flex;
   align-items: center;
