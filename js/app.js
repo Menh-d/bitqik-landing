@@ -48,8 +48,6 @@ const i18n = {
     infoSupport: "Support Center",
     infoPrivacy: "Privacy Policy",
     infoTerms: "Terms of Use",
-    appPreviewLabel: "bitqik Mobile App",
-    appPreviewTag: "GET APP",
     copyright: "COPYRIGHT 2026 © BITQIK SOLE CO., LTD. ALL RIGHTS RESERVED."
   },
   lao: {
@@ -58,8 +56,6 @@ const i18n = {
     infoSupport: "ສູນຊ່ວຍເຫຼືອ 24/7",
     infoPrivacy: "ນະໂຍບາຍຄວາມເປັນສ່ວນຕົວ",
     infoTerms: "ເງື່ອນໄຂການໃຊ້ບໍລິການ",
-    appPreviewLabel: "ດາວໂຫລດແອັບ bitqik",
-    appPreviewTag: "ດາວໂຫລດ",
     copyright: "COPYRIGHT 2026 © BITQIK SOLE CO., LTD. ສະຫງວນລິຂະສິດທັງໝົດ."
   }
 };
@@ -121,44 +117,8 @@ function setLanguage(lang) {
   renderEditorialNav();
 }
 
-// Interactive 3D Phone Parallax Effect on Mouse Move
-function initPhone3DParallax() {
-  const stage = document.getElementById("phoneStage");
-  const device = document.getElementById("phoneDevice");
-  const sheen = document.getElementById("phoneSheen");
-  if (!stage || !device) return;
-
-  window.addEventListener("mousemove", (e) => {
-    if (window.innerWidth < 1024) return;
-
-    const rect = stage.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-
-    const deltaX = (e.clientX - centerX) / (window.innerWidth / 2);
-    const deltaY = (e.clientY - centerY) / (window.innerHeight / 2);
-
-    const rotateY = -18 + deltaX * 14;
-    const rotateX = 10 - deltaY * 12;
-    const rotateZ = 3 + deltaX * 3;
-
-    device.style.transform = `rotateY(${rotateY.toFixed(2)}deg) rotateX(${rotateX.toFixed(2)}deg) rotateZ(${rotateZ.toFixed(2)}deg)`;
-
-    if (sheen) {
-      const sheenOpacity = Math.max(0.4, Math.min(1, 0.85 - deltaX * 0.3 + deltaY * 0.2));
-      sheen.style.opacity = sheenOpacity;
-    }
-  });
-
-  stage.addEventListener("mouseleave", () => {
-    device.style.transform = `rotateY(-18deg) rotateX(10deg) rotateZ(3deg)`;
-    if (sheen) sheen.style.opacity = 0.85;
-  });
-}
-
 document.addEventListener("DOMContentLoaded", () => {
   renderEditorialNav();
-  initPhone3DParallax();
 
   const langBtn = document.getElementById("lang-btn");
   if (langBtn) {

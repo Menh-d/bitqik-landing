@@ -276,9 +276,9 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px 60px 40px 6%;
+  padding: 20px 48px 40px 5%;
   z-index: 5;
-  gap: 40px;
+  gap: 36px;
 }
 
 .editorial-nav-list {
@@ -366,7 +366,7 @@ body {
 }
 
 /* ==========================================================================
-   INTERACTIVE 3D PHONE MOCKUP STAGE (NO SHADOW)
+   STATIC 3D PHONE MOCKUP STAGE & STORE DOCK ON LEFT
    ========================================================================== */
 .phone-3d-stage {
   perspective: 1400px;
@@ -376,32 +376,85 @@ body {
   justify-content: center;
   flex-shrink: 0;
   padding: 10px;
+  gap: 16px;
 }
 
+/* Left Store Buttons Dock */
+.phone-store-dock {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 5;
+}
+
+.store-badge-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #FFFFFF;
+  color: #002B49;
+  padding: 9px 16px;
+  border-radius: 14px;
+  text-decoration: none;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  transition: transform 0.25s var(--ease-out-expo), background 0.25s ease, color 0.25s ease;
+  white-space: nowrap;
+}
+
+.store-badge-btn:hover {
+  transform: translateX(-4px) scale(1.04);
+  background: #FF6600;
+  color: #FFFFFF;
+  border-color: #FF8833;
+}
+
+.store-badge-icon {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  fill: currentColor;
+}
+
+.store-badge-text {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  line-height: 1.15;
+}
+
+.store-badge-sub {
+  font-size: 0.62rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.75;
+}
+
+.store-badge-name {
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+/* Static Phone Device (Animation Cut/Removed Per User Request) */
 .phone-3d-wrapper {
   position: relative;
   display: block;
   text-decoration: none;
-  cursor: pointer;
   transform-style: preserve-3d;
-  animation: floatPhone3D 6s ease-in-out infinite alternate;
-  transition: transform 0.25s var(--ease-out-expo);
+  animation: none !important; /* ANIMATION REMOVED */
 }
 
-/* Natural 3D Resting Angle — CLEAN WITHOUT SHADOW */
+/* Natural 3D Resting Angle — CLEAN WITHOUT SHADOW & WITHOUT ANIMATION */
 .phone-3d-device {
   position: relative;
-  width: clamp(210px, 18vw, 260px);
+  width: clamp(210px, 18vw, 255px);
   aspect-ratio: 505 / 1024;
   transform-style: preserve-3d;
   transform: rotateY(-18deg) rotateX(10deg) rotateZ(3deg);
-  transition: transform 0.3s var(--ease-out-expo);
-  filter: none !important; /* SHADOW REMOVED PER USER REQUEST */
-}
-
-.phone-3d-wrapper:hover .phone-3d-device {
-  transform: rotateY(-8deg) rotateX(4deg) rotateZ(1deg) scale(1.05) translateZ(25px);
-  filter: none !important; /* SHADOW REMOVED PER USER REQUEST */
+  filter: none !important; /* SHADOW REMOVED */
+  animation: none !important; /* ANIMATION REMOVED */
 }
 
 /* Phone PNG Image */
@@ -430,58 +483,6 @@ body {
   z-index: 2;
   mix-blend-mode: screen;
   opacity: 0.85;
-  transition: opacity 0.3s ease;
-}
-
-.phone-3d-wrapper:hover .phone-screen-sheen {
-  opacity: 1;
-}
-
-/* Floating Download Icon Button at bottom center of phone */
-.phone-download-badge {
-  position: absolute;
-  bottom: -20px;
-  left: 50%;
-  transform: translateX(-50%) translateZ(40px);
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: #FFFFFF;
-  color: #002B49;
-  border: 1.5px solid rgba(255, 255, 255, 0.9);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.3s var(--ease-out-expo), background 0.3s ease, color 0.3s ease;
-  z-index: 3;
-}
-
-.download-svg-icon {
-  width: 22px;
-  height: 22px;
-  stroke: currentColor;
-  transition: transform 0.25s var(--ease-out-expo);
-}
-
-.phone-3d-wrapper:hover .phone-download-badge {
-  transform: translateX(-50%) translateZ(60px) scale(1.15);
-  background: #FF6600;
-  color: #FFFFFF;
-  border-color: #FF8833;
-}
-
-.phone-3d-wrapper:hover .download-svg-icon {
-  transform: translateY(2px);
-}
-
-/* Gentle 3D Bobbing Float Animation */
-@keyframes floatPhone3D {
-  0% {
-    transform: translateY(0px);
-  }
-  100% {
-    transform: translateY(-14px);
-  }
 }
 
 /* ==========================================================================
@@ -514,7 +515,7 @@ body {
     align-items: flex-start;
     justify-content: center;
     padding: 20px 36px 30px 4%;
-    gap: 30px;
+    gap: 28px;
   }
 
   .phone-3d-stage {
@@ -522,7 +523,7 @@ body {
   }
 
   .phone-3d-device {
-    width: 200px;
+    width: 195px;
     transform: rotateY(-12deg) rotateX(8deg);
   }
 }
@@ -579,16 +580,28 @@ body {
     grid-column: 1 / -1;
     grid-row: 2 / 3;
     padding: 30px 24px 24px 26%;
-    gap: 32px;
+    gap: 30px;
   }
 
   .phone-3d-stage {
     align-self: center;
+    flex-direction: column;
     margin-top: 10px;
+    gap: 14px;
+  }
+
+  .phone-store-dock {
+    flex-direction: row;
+    gap: 10px;
+    justify-content: center;
+  }
+
+  .store-badge-btn {
+    padding: 8px 12px;
   }
 
   .phone-3d-device {
-    width: 180px;
+    width: 175px;
     transform: rotateY(-8deg) rotateX(6deg);
   }
 
