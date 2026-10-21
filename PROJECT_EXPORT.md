@@ -30,4 +30,4 @@
    - ໂທລະສັບຕັ້ງຢູ່ນິ້ງໆຢ່າງສະຫງ່າງາມ (ບໍ່ມີ Animation ລອຍຂຶ້ນ-ລົງ ແລະ ບໍ່ມີເງົາສີດຳລົບກວນ).
 6. **ສີຫຼັກ Deep Bitqik Navy Blue**: ພື້ນຫຼັງ Canvas ປັບເປັນສີກົມມະທ່າເລິກ (`#002B49` gradient to `#083E66`).
 7. **Intersecting Curved Hairline Grid**: ເສັ້ນຂອບບາງສີຂາວທີ່ໂຄ້ງຕັດກັນຢູ່ຝັ່ງຊ້າຍ ຄືກັບຕົ້ນສະບັບ Asklepios.
-8. **Massive Editorial Navigation**: ລາຍການລິ້ງຂະໜາດໃຫຍ່ (`Website`, `Download App`, `Facebook`, `TikTok`, `YouTube`) ພ້ອມເສັ້ນໂຄ້ງ `╰─`.
+8. **Massive Editorial Navigation**: ລາຍການລິ້ງຂະໜາດໃຫຍ່ (`Website`, `Download App` -> `https://bitqik.com.la/download/`, `Facebook`, `TikTok`, `YouTube`) ພ້ອມເສັ້ນໂຄ້ງ `╰─`.

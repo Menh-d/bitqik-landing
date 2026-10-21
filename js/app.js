@@ -15,7 +15,7 @@ const bitqikNavItems = [
     id: "download",
     title: { en: "Download App", lao: "ດາວໂຫລດແອັບ" },
     sub: { en: "iOS & Android", lao: "iOS & Android" },
-    url: "https://bitqik.com/download",
+    url: "https://bitqik.com.la/download/",
     defaultActive: false
   },
   {
