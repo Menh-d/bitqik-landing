@@ -621,15 +621,19 @@ body {
 
   .phone-3d-stage {
     align-self: center;
-    flex-direction: column;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
     margin-top: 10px;
     gap: 14px;
   }
 
   .phone-store-dock {
-    flex-direction: row;
-    gap: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
     justify-content: center;
+    z-index: 10;
   }
 
   .store-icon-tooltip {
