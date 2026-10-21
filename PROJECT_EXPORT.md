@@ -24,8 +24,8 @@
    - Header, Navigation Items, 3D ໂທລະສັບ ແລະ ປຸ່ມ Store Icons ຈະຄ່ອຍໆ Glide ແລະ Pop ເຂົ້າມາຕາມລໍາດັບ (Staggered Animation).
 4. **ປຸ່ມດາວໂຫລດ App Store & Google Play ຢູ່ຝັ່ງຊ້າຍຂອງມືຖື (Pixel-Perfect Icons)**:
    - ຍ້າຍປຸ່ມດາວໂຫລດມາໄວ້ **ເບື້ອງຊ້າຍຂອງຕົວໂທລະສັບ** ເປັນໄອຄອນ Squircle ສີຂາວ ສະອາດຕາ (ຮອງຮັບທັງ Desktop, Tablet ແລະ Mobile).
-   - **Apple App Store**: ໂລໂກ້ Apple Vector ແທ້ ສີ Deep Navy ຄົມຊັດສັດສ່ວນມາດຕະຖານ ພ້ອມລິ້ງກົງໄປທີ່ [Apple App Store bitqik](https://apps.apple.com/app/bitqik/id6443438317).
-   - **Google Play Store**: ໂລໂກ້ Official Google Play 4 ສີແທ້ (Cyan, Yellow, Red, Green) ສວຍງາມ ແລະ ຖືກຕ້ອງຕາມ Brand Guidelines ພ້ອມລິ້ງກົງໄປທີ່ [Google Play bitqik](https://play.google.com/store/apps/details?id=com.bitqik.exchange).
+   - **Apple App Store**: ໂລໂກ້ Apple Vector ແທ້ ສີ Deep Navy ຄົມຊັດສັດສ່ວນມາດຕະຖານ ພ້ອມລິ້ງກົງໄປທີ່ [Apple App Store bitqik (Storefront LA)](https://apps.apple.com/la/app/bitqik/id1645041960).
+   - **Google Play Store**: ໂລໂກ້ Official Google Play 4 ສີແທ້ (Cyan, Yellow, Red, Green) ສວຍງາມ ແລະ ຖືກຕ້ອງຕາມ Brand Guidelines ພ້ອມລິ້ງກົງໄປທີ່ [Google Play bitqik (com.bitqik)](https://play.google.com/store/apps/details?id=com.bitqik).
 5. **ຕັດ Animation ຂອງຕົວໂທລະສັບອອກ (Static 3D Phone)**:
    - ໂທລະສັບຕັ້ງຢູ່ນິ້ງໆຢ່າງສະຫງ່າງາມ (ບໍ່ມີ Animation ລອຍຂຶ້ນ-ລົງ ແລະ ບໍ່ມີເງົາສີດຳລົບກວນ).
 6. **ສີຫຼັກ Deep Bitqik Navy Blue**: ພື້ນຫຼັງ Canvas ປັບເປັນສີກົມມະທ່າເລິກ (`#002B49` gradient to `#083E66`).
