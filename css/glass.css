@@ -128,29 +128,24 @@ body {
   transform: translateY(-1px);
 }
 
-/* Official Logo Pill + Crisp Emblem */
+/* Official bitqik Academy 3D Badge */
 .logo-mark-wrap {
   display: flex;
   align-items: center;
-  gap: 11px;
 }
 
-.logo-official-badge {
-  height: 40px;
-  padding: 5px 12px;
-  background: #FFFFFF;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
-}
-
-.logo-official-badge img {
-  height: 26px;
+.logo-academy-badge {
+  height: clamp(52px, 5.5vw, 68px);
   width: auto;
   object-fit: contain;
   display: block;
+  filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.35));
+  transition: transform 0.3s var(--ease-out-expo), filter 0.3s ease;
+}
+
+.brand-logo-link:hover .logo-academy-badge {
+  transform: translateY(-2px) scale(1.05);
+  filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.45));
 }
 
 .top-right-menu {
@@ -671,5 +666,321 @@ body {
     grid-row: 4 / 5;
     padding: 16px 24px 24px 26%;
     justify-content: flex-start;
+  }
+}
+
+/* ==========================================================================
+   CINEMATIC INTRO SCREEN ("bitqik Academy" Typing & Transition)
+   ========================================================================== */
+.intro-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: radial-gradient(circle at 50% 48%, #00365D 0%, #001B2E 55%, #001220 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  opacity: 1;
+  visibility: visible;
+  transition: 
+    opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    visibility 0.8s;
+  cursor: pointer;
+  user-select: none;
+}
+
+.intro-screen.is-dismissed {
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(1.05);
+  pointer-events: none;
+}
+
+.intro-center-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 24px;
+  position: relative;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* 3D Badge in Intro */
+.intro-badge-container {
+  position: relative;
+  margin-bottom: 24px;
+  opacity: 0;
+  transform: translateY(18px) scale(0.92);
+  transition: opacity 0.65s var(--ease-out-expo), transform 0.65s var(--ease-out-expo);
+}
+
+.intro-badge-container.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.intro-badge-glow {
+  position: absolute;
+  inset: -24px;
+  background: radial-gradient(circle, rgba(255, 102, 0, 0.32) 0%, rgba(0, 163, 255, 0.16) 45%, transparent 70%);
+  filter: blur(28px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.intro-badge-img {
+  position: relative;
+  height: clamp(56px, 9vw, 88px);
+  width: auto;
+  object-fit: contain;
+  display: block;
+  z-index: 2;
+  filter: drop-shadow(0 16px 36px rgba(0, 0, 0, 0.45));
+}
+
+/* Typewriter line */
+.intro-typewriter-line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-sans);
+  font-size: clamp(2.2rem, 5.2vw, 4.2rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: #FFFFFF;
+  min-height: 1.3em;
+  line-height: 1.2;
+}
+
+.intro-orange {
+  color: #FF6600;
+}
+
+.intro-white {
+  color: #FFFFFF;
+}
+
+.intro-blinking-cursor {
+  display: inline-block;
+  width: 3.5px;
+  height: 1.05em;
+  background: #FF6600;
+  margin-left: 5px;
+  border-radius: 2px;
+  box-shadow: 0 0 12px rgba(255, 102, 0, 0.9);
+  animation: blinkCursor 0.65s infinite alternate;
+}
+
+@keyframes blinkCursor {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.intro-subtitle {
+  margin-top: 14px;
+  font-family: var(--font-mono);
+  font-size: clamp(0.72rem, 1.4vw, 0.88rem);
+  font-weight: 500;
+  letter-spacing: 0.32em;
+  color: rgba(255, 255, 255, 0.65);
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.6s ease, transform 0.6s var(--ease-out-expo);
+}
+
+.intro-subtitle.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Skip button */
+.intro-skip-pill {
+  position: absolute;
+  bottom: 32px;
+  right: 36px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  color: rgba(255, 255, 255, 0.7);
+  padding: 7px 16px;
+  border-radius: 99px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.25s ease;
+  backdrop-filter: blur(10px);
+  z-index: 10;
+}
+
+.intro-skip-pill span {
+  font-size: 0.62rem;
+  padding: 2px 6px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+  color: #FFFFFF;
+}
+
+.intro-skip-pill:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #FFFFFF;
+  border-color: rgba(255, 255, 255, 0.45);
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   LANDING PAGE ENTRANCE TRANSITION (Lines Draw In & Elements Cascade)
+   ========================================================================== */
+body.has-intro .canvas-card:not(.is-revealed) .arch-line-upper,
+body.has-intro .canvas-card:not(.is-revealed) .arch-line-lower {
+  opacity: 0;
+  clip-path: inset(0 0 100% 0);
+}
+
+body.has-intro .canvas-card:not(.is-revealed) .top-left-brand,
+body.has-intro .canvas-card:not(.is-revealed) .top-right-menu,
+body.has-intro .canvas-card:not(.is-revealed) .editorial-nav-item,
+body.has-intro .canvas-card:not(.is-revealed) .phone-3d-wrapper,
+body.has-intro .canvas-card:not(.is-revealed) .store-icon-btn,
+body.has-intro .canvas-card:not(.is-revealed) .left-quadrant-info,
+body.has-intro .canvas-card:not(.is-revealed) .social-vertical-stack,
+body.has-intro .canvas-card:not(.is-revealed) .bottom-right-copyright {
+  opacity: 0;
+}
+
+/* 1. Hairline Lines Draw-In Animation */
+.canvas-card.is-revealed .arch-line-upper {
+  animation: drawLineUpper 0.95s cubic-bezier(0.16, 1, 0.3, 1) 0.12s both;
+}
+
+.canvas-card.is-revealed .arch-line-lower {
+  animation: drawLineLower 0.95s cubic-bezier(0.16, 1, 0.3, 1) 0.32s both;
+}
+
+@keyframes drawLineUpper {
+  0% {
+    clip-path: inset(0 0 100% 0);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+  }
+}
+
+@keyframes drawLineLower {
+  0% {
+    clip-path: inset(0 100% 0 0);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+  }
+}
+
+/* 2. Top Bar Slide Down */
+.canvas-card.is-revealed .top-left-brand,
+.canvas-card.is-revealed .top-right-menu {
+  animation: elementFadeDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.42s both;
+}
+
+@keyframes elementFadeDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 3. Massive Editorial Nav Stagger */
+.canvas-card.is-revealed .editorial-nav-item:nth-child(1) { animation: navItemStagger 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.48s both; }
+.canvas-card.is-revealed .editorial-nav-item:nth-child(2) { animation: navItemStagger 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.56s both; }
+.canvas-card.is-revealed .editorial-nav-item:nth-child(3) { animation: navItemStagger 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.64s both; }
+.canvas-card.is-revealed .editorial-nav-item:nth-child(4) { animation: navItemStagger 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.72s both; }
+.canvas-card.is-revealed .editorial-nav-item:nth-child(5) { animation: navItemStagger 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.80s both; }
+
+@keyframes navItemStagger {
+  0% {
+    opacity: 0;
+    transform: translateX(-32px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* 4. 3D Phone Glide In */
+.canvas-card.is-revealed .phone-3d-wrapper {
+  animation: phoneGlideIn 1s cubic-bezier(0.16, 1, 0.3, 1) 0.52s both;
+}
+
+@keyframes phoneGlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(28px) scale(0.93);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* 5. Store Buttons Pop In Beside Phone */
+.canvas-card.is-revealed .store-icon-btn:nth-child(1) {
+  animation: storeIconPop 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.72s both;
+}
+
+.canvas-card.is-revealed .store-icon-btn:nth-child(2) {
+  animation: storeIconPop 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.82s both;
+}
+
+@keyframes storeIconPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.4) translateX(12px);
+  }
+  70% {
+    transform: scale(1.08) translateX(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateX(0);
+  }
+}
+
+/* 6. Secondary Links, Social & Copyright Fade In */
+.canvas-card.is-revealed .left-quadrant-info,
+.canvas-card.is-revealed .social-vertical-stack,
+.canvas-card.is-revealed .bottom-right-copyright {
+  animation: elementFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.68s both;
+}
+
+@keyframes elementFadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

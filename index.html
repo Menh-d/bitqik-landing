@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>bitqik ບິດຄິກ — Official Channels &amp; Platform</title>
-  <meta name="description" content="bitqik ບິດຄິກ — Laos' #1 Licensed &amp; Regulated Digital Asset Exchange Platform." />
+  <title>bitqik Academy — Official Channels &amp; Platform</title>
+  <meta name="description" content="bitqik Academy — Laos' #1 Digital Asset Exchange &amp; Academy Platform." />
   <meta name="theme-color" content="#002B49" />
 
   <!-- OpenGraph / Social Meta -->
-  <meta property="og:title" content="bitqik ບິດຄິກ — Official Channels" />
-  <meta property="og:description" content="ແພລດຟອມຊື້-ຂາຍ ສິນຊັບດິຈິທັອນອັນດັບ 1 ໃນລາວ. ຕິດຕາມຊ່ອງທາງທາງການຂອງ bitqik" />
-  <meta property="og:image" content="assets/bitqik_logo_official.png" />
+  <meta property="og:title" content="bitqik Academy — Official Channels" />
+  <meta property="og:description" content="ແພລດຟອມຊື້-ຂາຍ ແລະ ຮຽນຮູ້ ສິນຊັບດິຈິທັອນອັນດັບ 1 ໃນລາວ. ຕິດຕາມຊ່ອງທາງທາງການຂອງ bitqik Academy" />
+  <meta property="og:image" content="assets/bitqik_academy_badge.png" />
   <meta property="og:type" content="website" />
 
   <!-- Google Fonts -->
@@ -23,20 +23,45 @@
 </head>
 <body>
 
+  <!-- Cinematic Brand Intro Screen: "bitqik Academy" Typing & Transition -->
+  <div id="intro-screen" class="intro-screen" aria-live="polite">
+    <div class="intro-center-stage">
+      <!-- 3D Badge Asset with Soft Glow -->
+      <div class="intro-badge-container" id="intro-badge-wrap">
+        <div class="intro-badge-glow" aria-hidden="true"></div>
+        <img src="assets/bitqik_academy_badge.png" alt="bitqik Academy" class="intro-badge-img" id="intro-badge-img" />
+      </div>
+
+      <!-- Typewriter Text Container -->
+      <div class="intro-typewriter-line" id="intro-typewriter-line">
+        <span class="intro-text-typed" id="intro-text-typed"></span>
+        <span class="intro-blinking-cursor" id="intro-cursor" aria-hidden="true"></span>
+      </div>
+
+      <!-- Tagline -->
+      <div class="intro-subtitle" id="intro-subtitle">
+        DIGITAL ASSETS EDUCATION &amp; PLATFORM
+      </div>
+    </div>
+
+    <!-- Quick Dismiss / Skip -->
+    <button type="button" class="intro-skip-pill" id="intro-skip-pill" aria-label="Skip introduction">
+      Skip <span>ESC</span>
+    </button>
+  </div>
+
   <!-- Main Rounded Architectural Canvas Card -->
-  <div class="canvas-card">
+  <div class="canvas-card" id="canvas-card">
 
-    <!-- Signature Intersecting Rounded Hairline Grid Lines -->
-    <div class="arch-line-upper" aria-hidden="true"></div>
-    <div class="arch-line-lower" aria-hidden="true"></div>
+    <!-- Signature Intersecting Rounded Hairline Grid Lines (Animated Draw-In) -->
+    <div class="arch-line-upper" id="arch-line-upper" aria-hidden="true"></div>
+    <div class="arch-line-lower" id="arch-line-lower" aria-hidden="true"></div>
 
-    <!-- Top-Left: Official bitqik Logo -->
+    <!-- Top-Left: bitqik Academy 3D Badge -->
     <header class="top-left-brand">
-      <a href="https://bitqik.com" target="_blank" rel="noopener noreferrer" class="brand-logo-link" title="bitqik Official Website">
+      <a href="https://bitqik.com" target="_blank" rel="noopener noreferrer" class="brand-logo-link" title="bitqik Academy">
         <div class="logo-mark-wrap">
-          <div class="logo-official-badge">
-            <img src="assets/bitqik_logo_official.png" alt="bitqik ບິດຄິກ Official Logo" />
-          </div>
+          <img src="assets/bitqik_academy_badge.png" alt="bitqik Academy Logo" class="logo-academy-badge" />
         </div>
       </a>
     </header>

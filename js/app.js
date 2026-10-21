@@ -117,8 +117,99 @@ function setLanguage(lang) {
   renderEditorialNav();
 }
 
+// ==========================================================================
+// CINEMATIC INTRO TYPEWRITER & TRANSITION ORCHESTRATION
+// ==========================================================================
+function initIntroExperience() {
+  const introScreen = document.getElementById("intro-screen");
+  const typewriterText = document.getElementById("intro-text-typed");
+  const badgeWrap = document.getElementById("intro-badge-wrap");
+  const subtitle = document.getElementById("intro-subtitle");
+  const skipBtn = document.getElementById("intro-skip-pill");
+  const canvasCard = document.getElementById("canvas-card");
+
+  if (!introScreen) {
+    if (canvasCard) canvasCard.classList.add("is-revealed");
+    return;
+  }
+
+  document.body.classList.add("has-intro");
+
+  let isDismissed = false;
+
+  function dismissIntro() {
+    if (isDismissed) return;
+    isDismissed = true;
+
+    introScreen.classList.add("is-dismissed");
+    if (canvasCard) {
+      canvasCard.classList.add("is-revealed");
+    }
+
+    // Clean up DOM and body class after animation sequence finishes
+    setTimeout(() => {
+      introScreen.style.display = "none";
+      document.body.classList.remove("has-intro");
+    }, 1300);
+  }
+
+  // Dismiss listeners: Skip button, click anywhere on intro, or ESC key
+  if (skipBtn) {
+    skipBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      dismissIntro();
+    });
+  }
+  introScreen.addEventListener("click", () => {
+    dismissIntro();
+  });
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" || e.key === " ") {
+      dismissIntro();
+    }
+  });
+
+  // Typewriter typing "bitqik Academy"
+  const fullText = "bitqik Academy";
+  let charIdx = 0;
+
+  function typeNextChar() {
+    if (isDismissed) return;
+
+    charIdx++;
+    const currentSub = fullText.slice(0, charIdx);
+
+    if (currentSub.length <= 6) {
+      typewriterText.innerHTML = `<span class="intro-orange">${currentSub}</span>`;
+    } else {
+      const bitqikPart = currentSub.slice(0, 6);
+      const academyPart = currentSub.slice(6);
+      typewriterText.innerHTML = `<span class="intro-orange">${bitqikPart}</span><span class="intro-white">${academyPart}</span>`;
+    }
+
+    if (charIdx < fullText.length) {
+      setTimeout(typeNextChar, 55);
+    } else {
+      // Reveal badge and tagline right after typing completes
+      setTimeout(() => {
+        if (badgeWrap) badgeWrap.classList.add("is-visible");
+        if (subtitle) subtitle.classList.add("is-visible");
+      }, 120);
+
+      // Transition smoothly into landing page after viewing
+      setTimeout(() => {
+        dismissIntro();
+      }, 1250);
+    }
+  }
+
+  // Initial pause before typing starts
+  setTimeout(typeNextChar, 250);
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   renderEditorialNav();
+  initIntroExperience();
 
   const langBtn = document.getElementById("lang-btn");
   if (langBtn) {
